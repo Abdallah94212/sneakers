@@ -1,17 +1,7 @@
 import React, { useEffect } from 'react';
 
 const Home = () => {
-    const [articles, setArticles] = useState([]);
-
-    // Appel API pour récupérer les articles
-    useEffect(() => {
-      fetch('http://localhost:1337/api/articles')
-        .then((response) => response.json())
-        .then((data) => {
-          setArticles(data.data); // Assure-toi que les articles sont bien dans data.data
-        })
-        .catch((error) => console.error('Erreur lors du fetch des articles:', error));
-    }, []); 
+  
 
     return (
     <div>
