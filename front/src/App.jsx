@@ -1,20 +1,29 @@
-import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router'
-import Home from "./components/Home.jsx"
-import NavBar from "./components/NavBar.jsx"
+import React, { useState } from "react";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
 
+const App = () => {
+  const [favorites, setFavorites] = useState([]);
 
-function App() {
+  const addToFavorites = (product) => {
+    if (!favorites.some((fav) => fav.id === product.id)) {
+      setFavorites([...favorites, product]);
+    }
+  };
+
+  const removeFromFavorites = (id) => {
+    setFavorites(favorites.filter((fav) => fav.id !== id));
+  };
 
   return (
-    <Router>
-      <NavBar/>
-      
-      <Routes>
-        <Route path='/' element={<Home/>} />
-      </Routes>
-    </Router>
-  )
-}
+    <div>
+      <NavBar
+        favorites={favorites}
+        removeFromFavorites={removeFromFavorites}
+      />
+      <Home addToFavorites={addToFavorites} />
+    </div>
+  );
+};
 
-export default App
+export default App;
